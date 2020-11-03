@@ -8,6 +8,7 @@ import android.os.Parcelable;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -240,62 +241,67 @@ class MyCustomAdapter extends BaseAdapter implements ListAdapter {
         holder.tvEpisodeTitle.setText(episodes.get(position).getName());
         holder.tvEpisodeDescription.setText(episodes.get(position).getDescription());
         holder.imgEpisode.setImageResource(episodes.get(position).getImage());
-        holder.rbEpisodes.setFocusable(true);
-        holder.rbEpisodes.setRating(simpleAppInfo.getFloat("rating " + position, 0.0f));
-        String comment = simpleAppInfo.getString("comment " + position, "");
-        System.out.println("the comment is: "+ comment);
-        holder.edtComment.setFocusable(true);
-        holder.edtComment.setText(simpleAppInfo.getString("comment " + position, ""));
-        holder.edtComment.setTag(null);
+        restore(position, holder);
         holder.rbEpisodes.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
                 if (fromUser) {
-                    System.out.println("on rating changed");
-                    episodes.get(position).setRating(rating);
-                    SharedPreferences.Editor editor = simpleAppInfo.edit();
-                    editor.putFloat("rating " + position, rating);
-                    editor.apply();
+                    saveRating(position, rating);
+//                    saveComment(position, holder.edtComment.getText().toString());
                     Map<String, ?> map = simpleAppInfo.getAll();
                     System.out.println(map);
 //                    System.out.println("episode number " + position + " is: " + episodes.get(position));
                 }
             }
         });
-
-        holder.edtComment.addTextChangedListener(new TextWatcher() {
+        holder.edtComment.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                if (holder.edtComment.getTag() == null) {
-                    System.out.println("after text changed " + position);
-                    final EditText comment = (EditText) holder.edtComment;
-                    if (comment.getText().toString().length() > 0) {
-                        Episode tmpEpi = episodes.get(position);
-                        tmpEpi.setComment(s.toString());
-                        episodes.set(position, tmpEpi);
-                    }
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                if (keyEvent != null) {
+                    saveComment(position, textView.getText().toString());
+                    return true;
                 }
-                System.out.println("current position is " + position);
-                SharedPreferences.Editor editor = simpleAppInfo.edit();
-                editor.putString("comment " + position, s.toString());
-                editor.apply();
-//                episodes.get(position).setComment(edtComment.getText().toString());
+                return false;
             }
         });
+//        holder.edtComment.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//
+//
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//                saveComment(position, s.toString());
+//
+//            }
+//        });
         return convertView;
     }
 
+    public void saveRating(int position, float rating){
+        SharedPreferences.Editor editor = simpleAppInfo.edit();
+        editor.putFloat("rating "+position, rating);
+        editor.apply();
+    }
+
+    public void saveComment(int position, String comment) {
+        SharedPreferences.Editor editor = simpleAppInfo.edit();
+        editor.putString("comment "+position, comment);
+        editor.apply();
+    }
+
+    public void restore(int position, MyCustomAdapter.ViewHolder holder){
+        //load the rating parameter to the ratingbar object, if there is no corresponding data, we set the rating parameter as 3
+        holder.rbEpisodes.setRating(simpleAppInfo.getFloat("rating " + position, 3f));
+        holder.edtComment.setText(simpleAppInfo.getString("comment " + position, ""));
+    }
     class ViewHolder {
         ImageView imgEpisode;
         TextView tvEpisodeTitle;
