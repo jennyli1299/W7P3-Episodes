@@ -1,7 +1,5 @@
 package com.example.sse.customlistview_sse;
 
-import java.util.Comparator;
-
 public class Episode {
     private String name;
     private String description;
@@ -56,16 +54,4 @@ public class Episode {
     public void setComment(String comment) {
         this.comment = comment;
     }
-
-    public static Comparator<Episode> ratingSort = new Comparator<Episode>() {
-        public int compare(Episode s1, Episode s2) {
-            if(s1.getRating()>s2.getRating()) {
-                return -1;
-            }else if(s1.getRating()<s2.getRating()){
-                return 1;
-            }else{
-                return 0;
-            }
-        }};
 }
-

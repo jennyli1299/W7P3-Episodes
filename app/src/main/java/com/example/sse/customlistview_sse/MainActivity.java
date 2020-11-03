@@ -138,8 +138,13 @@ public class MainActivity extends AppCompatActivity {
          */
         if(id == R.id.menu_kahn){
             Log.i("TAG", "Kahn clicked");
+<<<<<<< HEAD
 //            Intent intent = new Intent(MainActivity.this, KahnActivity.class);
 //            MainActivity.this.startActivity(intent);
+=======
+            //Intent intent = new Intent(MainActivity.this, KahnActivity.class);
+            //MainActivity.this.startActivity(intent);
+>>>>>>> parent of faf0670... changes to video
         }
 
         return super.onOptionsItemSelected(item);  //if none of the above are true, do the default and return a boolean.
