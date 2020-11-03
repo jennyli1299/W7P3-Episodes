@@ -1,6 +1,7 @@
 package com.example.sse.customlistview_sse;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -109,6 +110,37 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(getBaseContext(), "Hangup it's a telemarketer.", Toast.LENGTH_LONG).show();
             return true;
         }
+
+        /**
+         *  sort by title
+         */
+        if(id == R.id.menu_sortByTitle){
+            Log.i("TAG", "SortBytitle clicked");
+        }
+        /**
+         * sort by Rating
+         */
+        if(id == R.id.menu_sortByRating){
+            Log.i("TAG", "SortByratings clicked");
+
+        }
+        /**
+         * Play the audio of this phrase. Download it in
+         * advance to make sure it’s part of your APK.
+         */
+        if(id == R.id.menu_LongAndProsper){
+            Log.i("TAG", "LongAndProsper clicked");
+        }
+        /**
+         * Play the video of this iconic scene. Download it
+         * in advance to make sure it’s part of your APK.
+         */
+        if(id == R.id.menu_kahn){
+            Log.i("TAG", "Kahn clicked");
+            //Intent intent = new Intent(MainActivity.this, KahnActivity.class);
+            //MainActivity.this.startActivity(intent);
+        }
+
         return super.onOptionsItemSelected(item);  //if none of the above are true, do the default and return a boolean.
     }
 
