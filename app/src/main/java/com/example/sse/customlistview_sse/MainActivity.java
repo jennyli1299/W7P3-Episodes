@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.text.Editable;
@@ -46,8 +45,6 @@ public class MainActivity extends AppCompatActivity {
     ListView lvEpisodes;     //Reference to the listview GUI component
     MyCustomAdapter lvAdapter;   //Reference to the Adapter used to populate the listview.
     SharedPreferences simpleAppInfo;
-
-//    private MediaPlayer mp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -134,9 +131,6 @@ public class MainActivity extends AppCompatActivity {
          */
         if(id == R.id.menu_LongAndProsper){
             Log.i("TAG", "LongAndProsper clicked");
-            MediaPlayer LLaP = MediaPlayer.create(MainActivity.this, R.raw.live_long_and_prosper);
-//            LLaP.setLooping(true);
-            LLaP.start();
         }
         /**
          * Play the video of this iconic scene. Download it
