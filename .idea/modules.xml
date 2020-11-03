@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/app.iml" group="custom_list/app" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/custom_list.iml" filepath="$PROJECT_DIR$/.idea/modules/custom_list.iml" group="custom_list" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/w7p3-Episodes.iml" filepath="$PROJECT_DIR$/.idea/modules/w7p3-Episodes.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/w7p3-Episodes.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/w7p3-Episodes.app.iml" />
     </modules>
